@@ -1,0 +1,16 @@
+location /spotweb {
+	include deny.conf;
+	index /spotweb/index.php;
+	root <%= scope.lookupvar('spotweb::path') %>;
+
+	rewrite ^/spotweb/api/?$ /spotweb/index.php?page=newznabapi&$args last;
+	rewrite  ^/spotweb/?(.*)$  /$1  break;
+
+	location ~* \.php$ {
+		fastcgi_pass    localhost:9007; #defined in /etc/php5/fpm/pool.d/spotweb.conf
+		include         fastcgi_params;
+		fastcgi_index   index.php;
+
+		fastcgi_param   SCRIPT_FILENAME	<%= scope.lookupvar('spotweb::path') %>/index.php;
+	}
+}
