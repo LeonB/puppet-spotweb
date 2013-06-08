@@ -14,16 +14,16 @@
 #
 class spotweb::params {
 
-	### Application related parameters
+  ### Application related parameters
 
-	$path = $::operatingsystem ? {
-		default => '/usr/share/spotweb'
-	}
+  $path = $::operatingsystem ? {
+    default => '/usr/share/spotweb'
+  }
 
     $mysql_database = 'spotweb'
-	$mysql_user     = 'spotweb'
-	$mysql_host     = 'localhost'
+  $mysql_user     = 'spotweb'
+  $mysql_host     = 'localhost'
 
-	$enabled = true
+  $enabled = true
 
 }
